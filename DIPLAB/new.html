@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html>
+<title>連線資料頁面</title> 
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<!-- CSS -->
+<style type="text/css">
+#left_title {
+background-color: #eeeeee; 
+box-sizing: border-box; 
+color: #333333; 
+font-family: 微軟正黑體; 
+padding: 5px 10px;
+}
+
+#left_post {
+background-color: #effcff; 
+border: 0px solid #dbd9d9;
+border-left: 0;
+border-right: 0;
+border-top: 0;
+color: #333333; 
+font-family: 微軟正黑體; 
+}
+
+</style>
+
+<!-- Javascript -->
+<script type="text/javascript">
+$(document).ready(function (){
+    $("#in135").click(function(){        
+        /* set no cache */
+        $.ajaxSetup({ cache: false });
+
+        $.getJSON("http://loveplay123.com/loveplay123.com/DIPLAB/HumTmp135Array.json", function(data){ 
+           var html = [];
+
+            /* loop through array */
+            $.each(data, function(index, d){            
+                html.push("溫度 : ", d.temperature, " °C<br>",
+                          "濕度 : ", d.humidity, " %<br>" ,
+                          "relay_4 : ", d.relay_4, "<br>",
+                          "relay_3 : ", d.relay_3, "<br>",
+                          "relay_2 : ", d.relay_2, "<br>",
+                          "relay_1 : ", d.relay_1, "<br>",
+                          "目前註冊裝置ID : ", d.ID, "<br>", 
+                          "目前註冊裝置IP : ", d.NO, "", 
+                          ""
+                         );
+            });
+
+
+            $("#out135").html(html.join('')).css("font-family","微軟正黑體");
+        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+            /* alert(jqXHR.responseText) */
+            alert("資料庫未有註冊資訊！");
+        });
+    });
+});
+</script>
+
+
+
+<!-- Javascript -->
+<script type="text/javascript">
+$(document).ready(function (){
+    $("#in121").click(function(){        
+        /* set no cache */
+        $.ajaxSetup({ cache: false });
+
+        $.getJSON("http://loveplay123.com/loveplay123.com/DIPLAB/HumTmp121Array.json", function(data1){ 
+           var html = [];
+
+            /* loop through array */
+            $.each(data1, function(index, d){            
+                html.push(
+                          "溫度 : ", d.temperature, " °C<br> ",
+                          "濕度 : ", d.humidity, " %<br>" ,
+                          "relay_4 : ", d.relay_4, "<br>",
+                          "relay_3 : ", d.relay_3, "<br>",
+                          "relay_2 : ", d.relay_2, "<br>",
+                          "relay_1 : ", d.relay_1, "<br>",
+                          "目前註冊裝置ID : ", d.ID, "<br>",
+                          "目前註冊裝置IP : ", d.NO, "", 
+                          ""
+                         );
+            });
+
+
+            $("#out121").html(html.join('')).css("font-family","微軟正黑體");
+        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+            /* alert(jqXHR.responseText) */
+            alert("資料庫未有註冊資訊！");
+        });
+    });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function (){
+    $("#in1").click(function(){        
+        /* set no cache */
+        $.ajaxSetup({ cache: false });
+
+        $.getJSON("http://loveplay123.com/loveplay123.com/DIPLAB/1.json", function(data){ 
+           var html = [];
+
+            /* loop through array */
+            $.each(data, function(index, d){            
+                html.push("溫度 : ", d.temperature, " °C<br>",
+                          "濕度 : ", d.humidity, " %<br>" ,
+                          "relay_4 : ", d.relay_4, "<br>",
+                          "relay_3 : ", d.relay_3, "<br>",
+                          "relay_2 : ", d.relay_2, "<br>",
+                          "relay_1 : ", d.relay_1, "<br>",
+                          "目前註冊裝置ID : ", d.ID, "<br>",
+                          "目前註冊裝置IP : ", d.NO, "",
+                          ""
+                         );
+            });
+
+
+            $("#out1").html(html.join('')).css("font-family","微軟正黑體");
+        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+            /* alert(jqXHR.responseText) */
+            alert("資料庫未有註冊資訊！");
+        });
+    });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function (){
+    $("#in2").click(function(){        
+        /* set no cache */
+        $.ajaxSetup({ cache: false });
+
+        $.getJSON("http://loveplay123.com/loveplay123.com/DIPLAB/2.json", function(data){ 
+           var html = [];
+
+            /* loop through array */
+            $.each(data, function(index, d){            
+                html.push("溫度 : ", d.temperature, " °C<br>",
+                          "濕度 : ", d.humidity, " %<br>" ,
+                          "relay_4 : ", d.relay_4, "<br>",
+                          "relay_3 : ", d.relay_3, "<br>",
+                          "relay_2 : ", d.relay_2, "<br>",
+                          "relay_1 : ", d.relay_1, "<br>",
+                          "目前註冊裝置ID : ", d.ID, "<br>",
+                          "目前註冊裝置IP : ", d.NO, "",
+                          ""
+                         );
+            });
+
+
+            $("#out2").html(html.join('')).css("font-family","微軟正黑體");
+        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+            /* alert(jqXHR.responseText) */
+            alert("資料庫未有註冊資訊！");
+        });
+    });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function (){
+    $("#in3").click(function(){        
+        /* set no cache */
+        $.ajaxSetup({ cache: false });
+
+        $.getJSON("http://loveplay123.com/loveplay123.com/DIPLAB/3.json", function(data){ 
+           var html = [];
+
+            /* loop through array */
+            $.each(data, function(index, d){            
+                html.push("溫度 : ", d.temperature, " °C<br>",
+                          "濕度 : ", d.humidity, " %<br>" ,
+                          "relay_4 : ", d.relay_4, "<br>",
+                          "relay_3 : ", d.relay_3, "<br>",
+                          "relay_2 : ", d.relay_2, "<br>",
+                          "relay_1 : ", d.relay_1, "<br>",
+                          "目前註冊裝置ID : ", d.ID, "<br>",
+                          "目前註冊裝置IP : ", d.NO, "",
+                          ""
+                         );
+            });
+
+
+            $("#out3").html(html.join('')).css("font-family","微軟正黑體");
+        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+            /* alert(jqXHR.responseText) */
+            alert("資料庫未有註冊資訊！");
+        });
+    });
+});
+</script>
+
+
+
+
+
+</head>
+<body>
+
+<!-- HTML -->
+
+ 
+<div style="text-align: center;">
+<div id="left_title" class="post-pageview" ><b>目前裝置連線狀況</b></div>
+
+<div id="left_post" class="post-pageview"><b>裝置一</b></div>
+<div id="out135" class="post-pageview" style="background-color: #effcff; box-sizing: border-box; color: #333333; font-family: 文泉驛正黑, 微軟正黑體"></div>
+<button id="in135" type="button" class="post-pageview" style="background-color: #fafafa;width: 100%;">獲取第1台數據</button>
+
+<div id="left_post" class="post-pageview"><b>裝置二</b></div>
+<div id="out121" class="post-pageview" style="background-color: #effcff; box-sizing: border-box; color: #333333; font-family: 文泉驛正黑, 微軟正黑體"></div>
+<button id="in121"  type="button" class="post-pageview" style="background-color: #fafafa;width: 100%;">獲取第2台數據</button>
+
+<div id="left_post" class="post-pageview"><b>裝置三</b></div>
+<div id="out1" class="post-pageview" style="background-color: #effcff; box-sizing: border-box; color: #333333; font-family: 文泉驛正黑, 微軟正黑體"></div>
+<button id="in1"  type="button" class="post-pageview" style="background-color: #fafafa;width: 100%;">獲取第3台數據</button>
+
+<div id="left_post" class="post-pageview"><b>裝置四</b></div>
+<div id="out2" class="post-pageview" style="background-color: #effcff; box-sizing: border-box; color: #333333; font-family: 文泉驛正黑, 微軟正黑體"></div>
+<button id="in2"  type="button" class="post-pageview" style="background-color: #fafafa;width: 100%;">獲取第4台數據</button>
+
+<div id="left_post" class="post-pageview"><b>裝置五</b></div>
+<div id="out3" class="post-pageview" style="background-color: #effcff; box-sizing: border-box; color: #333333; font-family: 文泉驛正黑, 微軟正黑體"></div>
+<button id="in3"  type="button" class="post-pageview" style="background-color: #fafafa;width: 100%;">獲取第5台數據</button>
+
+</div>
+
+
+
+
+</body>
+</html>

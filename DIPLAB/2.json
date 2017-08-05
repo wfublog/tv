@@ -1,0 +1,12 @@
+[
+    {
+        "ID": "10",
+        "NO": "135",
+        "humidity": "48",
+        "relay_1": "OFF",
+        "relay_2": "ON",
+        "relay_3": "OFF",
+        "relay_4": "OFF",
+        "temperature": "15"
+    }
+]

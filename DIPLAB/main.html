@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html>
+<title>Simple Frame Set Example</title>
+
+<head>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+	<!-- CSS -->
+	<style>
+		/*字型*/
+		
+		html,
+		body {
+			font-family: "微軟正黑體", "Microsoft JhengHei", Arial, sans-serif;
+			font-size: 16px;
+		}
+		/*常用class*/
+		
+		* {
+			box-sizing: border-box;
+		}
+		.none {
+			display: none
+		}
+		.auto {
+			margin: auto
+		}
+		.center {
+			text-align: center
+		}
+		.decoration {
+			text-decoration: none!important
+		}
+		.middle {
+			vertical-align: middle
+		}
+		.inline {
+			display: inline
+		}
+		.inlineBlock {
+			display: inline-block
+		}
+		.hidden {
+			visibility: hidden
+		}
+		.overflow {
+			overflow: auto;
+		}
+		.clear {
+			clear: both;
+		}
+		.red {
+			color: #990000;
+		}
+		.right {
+			float: right;
+		}
+		.left {
+			float: left;
+		}
+		.alignLeft {
+			text-align: left;
+		}
+		.alignRight {
+			text-align: right;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!--連線資料區塊-->
+			<div id="left_json_data_outer" class="col-sm-4">
+				<div class="well">目前裝置連線狀況</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">裝置一</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">獲取第1台數據</button>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">裝置二</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">獲取第2台數據</button>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">裝置三</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">獲取第3台數據</button>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">裝置四</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">獲取第4台數據</button>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">裝置五</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">獲取第5台數據</button>
+					</div>
+				</div>
+			</div>
+			<!--連線資料區塊-->
+
+			<!--ID 頁面-->
+			<div id="right_json_data_outer" class="col-sm-8">
+				<div class="well">ID 頁面</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Raspberry Pi 加入成功</div>
+					<div class="panel-body"></div>
+					<div class="panel-footer">
+						<button class="btn btn-default">顯示本裝置詳細內容</button>
+					</div>
+				</div>
+			</div>
+			<!--ID 頁面-->
+
+		</div>
+	</div>
+
+	<!--取得左邊連線資料-->
+	<script>
+		/*依序設定 json 檔名, 每個字串用小寫逗號 "," 隔開, 最後一筆資料後面不要有逗號*/
+		var json_data_set = [
+			"HumTmp135Array", "HumTmp121Array", "1", "2", "3"
+		];
+
+		var $button = $("#left_json_data_outer button");
+
+		$button.click(function() {
+			var idx = $button.index(this);
+
+console.log("idx="+idx);
+
+			$.ajaxSetup({ /* set no cache */
+				cache: false
+			});
+			$.getJSON(json_data_set[idx] + ".json", function(data) {
+				var html = "",
+					i;
+
+				for (i in data) {
+					html += "<div>溫度 :" + data.temperature + " °C</div>";
+					html += "<div>溫度 : " + data.temperature + " °C</div>";
+					html += "<div>濕度 : " + data.humidity + " %</div>";
+					html += "<div>relay_4 :" + data.relay_4 + "</div>";
+					html += "<div>relay_3 :" + data.relay_3 + "</div>";
+					html += "<div>relay_2 :" + data.relay_2 + "</div>";
+					html += "<div>relay_1 :" + data.relay_1 + "</div>";
+					html += "<div>目前註冊裝置ID : " + data.ID + "</div>";
+					html += "<div>目前註冊裝置IP : " + data.NO + " </div>";
+				}
+				$("left_json_data_outer .panel-body").eq(idx).html(html);
+			}).error(function(jqXHR, textStatus, errorThrown) {
+				/* assign handler */
+				/* alert(jqXHR.responseText) */
+				alert("資料庫未有註冊資訊！");
+			});
+		});
+	</script>
+	<!--取得左邊連線資料-->
+
+	<!--取得右邊連線資料-->
+	<script>
+	</script>
+	<!--取得右邊連線資料-->
+
+</body>
+
+</html>
