@@ -18,6 +18,7 @@
 		}
 		/*主區塊*/
 		
+		.well,
 		.panel {
 			text-align: center;
 		}
@@ -37,7 +38,6 @@
 			text-align: center;
 			z-index: 10;
 			cursor: pointer;
-			line-height: 100%;
 			top: 50%;
 			transform: translateY(-50%);
 			bottom: 0;
@@ -150,7 +150,7 @@
 			<div id="right_json_data_outer" class="col-sm-8">
 				<div class="well">ID 頁面</div>
 				<div id="input_outer" class="input-group">
-					<input id="input_url" type="text" class="form-control" placeholder="輸入網址">
+					<input id="input_url" type="text" class="form-control input-lg" placeholder="輸入 ID">
 					<span id="submit_btn" class="input-group-addon">查詢</span>
 					<span id="clear_btn" title="清除搜尋">X</i>
 					</span>
@@ -255,7 +255,7 @@
 			for (i = 0; i < l; i++) {
 				html += "<div class='panel panel-primary'>";
 				html += "<div class='panel-heading'>Raspberry Pi 加入成功</div>";
-				html += "<div class='panel-body'>" + $elem[i].parent().html() + "</div>";
+				html += "<div class='panel-body'>" + $elem.eq(i).parent().html() + "</div>";
 				html += "</div>";
 			}
 
