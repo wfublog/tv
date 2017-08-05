@@ -144,16 +144,15 @@
 		$button.click(function() {
 			var idx = $button.index(this);
 
-console.log("idx="+idx);
-
 			$.ajaxSetup({ /* set no cache */
 				cache: false
 			});
 			$.getJSON(json_data_set[idx] + ".json", function(json) {
 				var data = json[0], html = "",
 					i;
+				
+				console.log("data.temperature="+data.temperature);
 
-				for (i in data) {
 					html += "<div>溫度 :" + data.temperature + " °C</div>";
 					html += "<div>溫度 : " + data.temperature + " °C</div>";
 					html += "<div>濕度 : " + data.humidity + " %</div>";
@@ -163,7 +162,7 @@ console.log("idx="+idx);
 					html += "<div>relay_1 :" + data.relay_1 + "</div>";
 					html += "<div>目前註冊裝置ID : " + data.ID + "</div>";
 					html += "<div>目前註冊裝置IP : " + data.NO + " </div>";
-				}
+
 				$("left_json_data_outer .panel-body").eq(idx).html(html);
 			}).error(function(jqXHR, textStatus, errorThrown) {
 				/* assign handler */
