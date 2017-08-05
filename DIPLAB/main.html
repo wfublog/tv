@@ -149,8 +149,8 @@ console.log("idx="+idx);
 			$.ajaxSetup({ /* set no cache */
 				cache: false
 			});
-			$.getJSON(json_data_set[idx] + ".json", function(data) {
-				var html = "",
+			$.getJSON(json_data_set[idx] + ".json", function(json) {
+				var data = json[0], html = "",
 					i;
 
 				for (i in data) {
