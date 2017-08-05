@@ -38,8 +38,13 @@
 			z-index: 10;
 			cursor: pointer;
 			line-height: 100%;
-			top: 0;
+			top: 50%;
+			transform: translateY(-50%);
 			bottom: 0;
+		}
+		#submit_btn {
+			min-width: 100px;
+			cursor: pointer;
 		}
 		/*常用class*/
 		
@@ -147,13 +152,10 @@
 				<div id="input_outer" class="input-group">
 					<input id="input_url" type="text" class="form-control" placeholder="輸入網址">
 					<span id="submit_btn" class="input-group-addon">查詢</span>
-					<span id="clear_btn" title="清除網址">X</i>
+					<span id="clear_btn" title="清除搜尋">X</i>
 					</span>
 				</div>
-				<div id="search_device" class="panel panel-primary none">
-					<div class="panel-heading">Raspberry Pi 加入成功</div>
-					<div class="panel-body"></div>
-				</div>
+				<div id="search_device"></div>
 				<div id="this_device" class="panel panel-primary">
 					<div class="panel-heading">Raspberry Pi 加入成功</div>
 					<div class="panel-body"></div>
@@ -169,41 +171,45 @@
 
 	<!--取得左邊連線資料-->
 	<script>
-		/*依序設定 json 檔名, 每個字串用小寫逗號 "," 隔開, 最後一筆資料後面不要有逗號*/
-		var json_data_set = [
-			"HumTmp135Array", "HumTmp121Array", "1", "2", "3"
-		];
+		(function($) {
+			/*依序設定 json 檔名, 每個字串用小寫逗號 "," 隔開, 最後一筆資料後面不要有逗號*/
+			var json_data_set = [
+					"HumTmp135Array", "HumTmp121Array", "1", "2", "3"
+				],
+				$button = $("#left_json_data_outer button");
 
-		var $button = $("#left_json_data_outer button");
+			$button.each(function() {
+				var idx = $button.index(this);
 
-		$button.click(function() {
-			var idx = $button.index(this);
+				$.ajaxSetup({ /* set no cache */
+					cache: false
+				});
+				$.getJSON(json_data_set[idx] + ".json", function(json) {
+					var data = json[0],
+						html = "";
 
-			$.ajaxSetup({ /* set no cache */
-				cache: false
+					html += "<div>溫度 : " + data.temperature + " °C</div>";
+					html += "<div>濕度 : " + data.humidity + " %</div>";
+					html += "<div>relay_4 :" + data.relay_4 + "</div>";
+					html += "<div>relay_3 :" + data.relay_3 + "</div>";
+					html += "<div>relay_2 :" + data.relay_2 + "</div>";
+					html += "<div>relay_1 :" + data.relay_1 + "</div>";
+					html += "<div>目前註冊裝置ID : <span class='id" + data.ID + "'>" + data.ID + "</span></div>";
+					html += "<div>目前註冊裝置IP : " + data.NO + " </div>";
+
+					$("#left_json_data_outer .panel-body").eq(idx).html(html);
+				}).error(function(jqXHR, textStatus, errorThrown) {
+					/* assign handler */
+					/* alert(jqXHR.responseText) */
+					alert("資料庫未有註冊資訊！");
+				});
 			});
-			$.getJSON(json_data_set[idx] + ".json", function(json) {
 
-				var data = json[0],
-					html = "",
-					i;
-
-				html += "<div>溫度 : " + data.temperature + " °C</div>";
-				html += "<div>濕度 : " + data.humidity + " %</div>";
-				html += "<div>relay_4 :" + data.relay_4 + "</div>";
-				html += "<div>relay_3 :" + data.relay_3 + "</div>";
-				html += "<div>relay_2 :" + data.relay_2 + "</div>";
-				html += "<div>relay_1 :" + data.relay_1 + "</div>";
-				html += "<div>目前註冊裝置ID : <span id='" + data.ID + "'>" + data.ID + "</span></div>";
-				html += "<div>目前註冊裝置IP : " + data.NO + " </div>";
-
-				$("#left_json_data_outer .panel-body").eq(idx).html(html).show();
-			}).error(function(jqXHR, textStatus, errorThrown) {
-				/* assign handler */
-				/* alert(jqXHR.responseText) */
-				alert("資料庫未有註冊資訊！");
+			$button.click(function() {
+				var idx = $button.index(this);
+				$("#left_json_data_outer .panel-body").eq(idx).show();
 			});
-		});
+		})(jQuery);
 	</script>
 	<!--取得左邊連線資料-->
 
@@ -211,13 +217,13 @@
 	<script>
 		// 監控 "查詢" + Enter 按鈕
 		$("#submit_btn").click(function() {
-			submitUrl();
+			submit();
 		});
 
 		// 監控 "查詢" + Enter 按鈕
 		$("#input_url").keyup(function(e) {
 			if (e.which == 13) {
-				submitUrl();
+				submit();
 			}
 		});
 
@@ -227,17 +233,33 @@
 		});
 
 		// 送出查詢
-		function submitUrl() {
+		function submit() {
 			var queryID = $("#input_url").val(),
-				$targetID = $("#" + queryID),
-				html;
+				$targetID = $(".id" + queryID),
+				l = $targetID.length;
 
-			if (!$targetID.length) {
+			if (!l) {
 				alert("找不到資料");
 			} else {
-				html = $targetID.parent().html();
-				$("#search_device").show().find(".panel-body").html(html);
+				showIDinfo($targetID, l);
 			}
+		}
+
+		function showIDinfo($elem, l) {
+			var html = "",
+				i;
+
+			// 動畫
+			$("#search_device").show().html("<div style='margin: 20px auto;text-align: center;'><img src='https://lh5.googleusercontent.com/-EyVZ0f8J0qQ/UCeEG7aa8nI/AAAAAAAADtY/9sXw53XkYXM/s512/indicator-light.gif' style='vertical-align: middle;' /><span style='vertical-align: middle;'> please wait...</span></div>");
+
+			for (i = 0; i < l; i++) {
+				html += "<div class='panel panel-primary'>";
+				html += "<div class='panel-heading'>Raspberry Pi 加入成功</div>";
+				html += "<div class='panel-body'>" + $elem[i].parent().html() + "</div>";
+				html += "</div>";
+			}
+
+			$("#search_device").html(html);
 		}
 	</script>
 	<!--取得右邊連線資料-->
