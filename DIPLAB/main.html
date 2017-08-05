@@ -255,7 +255,7 @@
 			for (i = 0; i < l; i++) {
 				html += "<div class='panel panel-primary'>";
 				html += "<div class='panel-heading'>Raspberry Pi 加入成功</div>";
-				html += "<div class='panel-body'>" + $elem.eq(i).parent().html() + "</div>";
+				html += "<div class='panel-body'>" + $elem.eq(i).parents(".panel-body").html() + "</div>";
 				html += "</div>";
 			}
 
