@@ -163,7 +163,7 @@
 					html += "<div>目前註冊裝置ID : " + data.ID + "</div>";
 					html += "<div>目前註冊裝置IP : " + data.NO + " </div>";
 
-				$("left_json_data_outer .panel-body").eq(idx).html(html);
+				$("#left_json_data_outer .panel-body").eq(idx).html(html);
 			}).error(function(jqXHR, textStatus, errorThrown) {
 				/* assign handler */
 				/* alert(jqXHR.responseText) */
