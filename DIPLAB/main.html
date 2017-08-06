@@ -76,16 +76,17 @@
 
 		(function($) {
 			var html = "",
-				i;
+				i, no;
 
 			html += "<div class='well'>目前裝置連線狀況</div>";
 
 			for (i in json_data_set) {
+				no = i + 1;
 				html += "<div class='panel panel-primary center'>";
-				html += "<div class='panel-heading'>裝置 " + (i + 1) + "</div>";
+				html += "<div class='panel-heading'>裝置 " + no + "</div>";
 				html += "<div class='panel-body'></div>";
 				html += "<div class='panel-footer'>";
-				html += "<button class='btn btn-default btn-block'>獲取第 " + (i + 1) + " 台數據</button>";
+				html += "<button class='btn btn-default btn-block'>獲取第 " + no + " 台數據</button>";
 				html += "</div></div>";
 			}
 			$("#left_json_data_outer").html(html);
