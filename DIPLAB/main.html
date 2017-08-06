@@ -49,51 +49,7 @@
 		<div class="row">
 
 			<!--連線資料區塊-->
-			<div id="left_json_data_outer" class="col-sm-4">
-				<div class="well">目前裝置連線狀況</div>
-
-				<div class="panel panel-primary center">
-					<div class="panel-heading">裝置一</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default btn-block">獲取第1台數據</button>
-					</div>
-				</div>
-
-				<div class="panel panel-primary">
-					<div class="panel-heading">裝置二</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default btn-block">獲取第2台數據</button>
-					</div>
-				</div>
-
-				<div class="panel panel-primary">
-					<div class="panel-heading">裝置三</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default btn-block">獲取第3台數據</button>
-					</div>
-				</div>
-
-				<div class="panel panel-primary">
-					<div class="panel-heading">裝置四</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default btn-block">獲取第4台數據</button>
-					</div>
-				</div>
-
-				<div class="panel panel-primary">
-					<div class="panel-heading">裝置五</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default btn-block">獲取第5台數據</button>
-					</div>
-				</div>
-
-			</div>
-			<!--連線資料區塊-->
+			<div id="left_json_data_outer" class="col-sm-4"></div>
 
 			<!--搜尋區塊-->
 			<div id="right_json_data_outer" class="col-sm-8">
@@ -111,14 +67,36 @@
 		</div>
 	</div>
 
+	<!--產生左邊連線資料-->
+	<script>
+		/*依序設定 json 檔名, 每個字串用小寫逗號 "," 隔開, 最後一筆資料後面不要有逗號*/
+		var json_data_set = [
+			"HumTmp135Array", "HumTmp121Array", "1", "2", "3"
+		];
+
+		(function($) {
+			var html = "",
+				i;
+
+			html += "<div class='well'>目前裝置連線狀況</div>";
+
+			for (i in json_data_set) {
+				html += "<div class='panel panel-primary center'>";
+				html += "<div class='panel-heading'>裝置 " + (i + 1) + "</div>";
+				html += "<div class='panel-body'></div>";
+				html += "<div class='panel-footer'>";
+				html += "<button class='btn btn-default btn-block'>獲取第 " + (i + 1) + " 台數據</button>";
+				html += "</div></div>";
+			}
+			$("#left_json_data_outer").html(html);
+		})(jQuery);
+	</script>
+	<!--產生左邊連線資料-->
+
 	<!--取得左邊連線資料-->
 	<script>
 		(function($) {
-			/*依序設定 json 檔名, 每個字串用小寫逗號 "," 隔開, 最後一筆資料後面不要有逗號*/
-			var json_data_set = [
-					"HumTmp135Array", "HumTmp121Array", "1", "2", "3"
-				],
-				$button = $("#left_json_data_outer button");
+			var $button = $("#left_json_data_outer button");
 
 			$button.each(function() {
 				var idx = $button.index(this);
