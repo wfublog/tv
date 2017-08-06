@@ -10,92 +10,35 @@
 	<!-- CSS -->
 	<style>
 		/*字型*/
-		
-		html,
-		body {
-			font-family: "微軟正黑體", "Microsoft JhengHei", Arial, sans-serif;
-			font-size: 16px;
-		}
+		html,body{font-family:"微軟正黑體","Microsoft JhengHei",Arial,sans-serif;font-size:16px}
+
 		/*主區塊*/
-		
-		.well,
-		.panel {
-			text-align: center;
-		}
-		#left_json_data_outer .panel-body {
-			display: none;
-		}
+		.well,.panel{text-align:center}
+		#left_json_data_outer .panel-body{display:none}
+
 		/*搜尋區塊*/
+		#input_outer{position:relative;margin:0 0 20px}
+		#clear_btn{position:absolute;right:100px;width:30px;text-align:center;z-index:10;cursor:pointer;top:50%;transform:translateY(-50%);bottom:0}
+		#submit_btn{min-width:100px;cursor:pointer}
+
 		
-		#input_outer {
-			position: relative;
-			margin: 0 0 20px;
-		}
-		#clear_btn {
-			position: absolute;
-			right: 100px;
-			width: 30px;
-			text-align: center;
-			z-index: 10;
-			cursor: pointer;
-			top: 50%;
-			transform: translateY(-50%);
-			bottom: 0;
-		}
-		#submit_btn {
-			min-width: 100px;
-			cursor: pointer;
-		}
 		/*常用class*/
-		
-		* {
-			box-sizing: border-box;
-		}
-		.none {
-			display: none
-		}
-		.auto {
-			margin: auto
-		}
-		.center {
-			text-align: center
-		}
-		.decoration {
-			text-decoration: none!important
-		}
-		.middle {
-			vertical-align: middle
-		}
-		.inline {
-			display: inline
-		}
-		.inlineBlock {
-			display: inline-block
-		}
-		.hidden {
-			visibility: hidden
-		}
-		.overflow {
-			overflow: auto;
-		}
-		.clear {
-			clear: both;
-		}
-		.red {
-			color: #990000;
-		}
-		.right {
-			float: right;
-		}
-		.left {
-			float: left;
-		}
-		.alignLeft {
-			text-align: left;
-		}
-		.alignRight {
-			text-align: right;
-		}
+		*{box-sizing:border-box}
+		.none{display:none}
+		.auto{margin:auto}
+		.center{text-align:center}
+		.decoration{text-decoration:none!important}
+		.middle{vertical-align:middle}
+		.inline{display:inline}
+		.inlineBlock{display:inline-block}
+		.hidden{visibility:hidden}
+		.overflow{overflow:auto}
+		.clear{clear:both}
+		.red{color:#990000}
+		.right{float:right}
+		.left{float:left}
+		.alignLeft{text-align:left}
+		.alignRight{text-align:right}
 	</style>
 
 </head>
@@ -108,6 +51,7 @@
 			<!--連線資料區塊-->
 			<div id="left_json_data_outer" class="col-sm-4">
 				<div class="well">目前裝置連線狀況</div>
+
 				<div class="panel panel-primary center">
 					<div class="panel-heading">裝置一</div>
 					<div class="panel-body"></div>
@@ -115,6 +59,7 @@
 						<button class="btn btn-default btn-block">獲取第1台數據</button>
 					</div>
 				</div>
+
 				<div class="panel panel-primary">
 					<div class="panel-heading">裝置二</div>
 					<div class="panel-body"></div>
@@ -122,6 +67,7 @@
 						<button class="btn btn-default btn-block">獲取第2台數據</button>
 					</div>
 				</div>
+
 				<div class="panel panel-primary">
 					<div class="panel-heading">裝置三</div>
 					<div class="panel-body"></div>
@@ -129,6 +75,7 @@
 						<button class="btn btn-default btn-block">獲取第3台數據</button>
 					</div>
 				</div>
+
 				<div class="panel panel-primary">
 					<div class="panel-heading">裝置四</div>
 					<div class="panel-body"></div>
@@ -136,6 +83,7 @@
 						<button class="btn btn-default btn-block">獲取第4台數據</button>
 					</div>
 				</div>
+
 				<div class="panel panel-primary">
 					<div class="panel-heading">裝置五</div>
 					<div class="panel-body"></div>
@@ -143,6 +91,7 @@
 						<button class="btn btn-default btn-block">獲取第5台數據</button>
 					</div>
 				</div>
+
 			</div>
 			<!--連線資料區塊-->
 
@@ -156,13 +105,6 @@
 					</span>
 				</div>
 				<div id="search_device"></div>
-				<div id="this_device" class="panel panel-primary">
-					<div class="panel-heading">Raspberry Pi 加入成功</div>
-					<div class="panel-body"></div>
-					<div class="panel-footer">
-						<button class="btn btn-default">顯示本裝置詳細內容</button>
-					</div>
-				</div>
 			</div>
 			<!--搜尋區塊-->
 
@@ -247,15 +189,16 @@
 
 		function showIDinfo($elem, l) {
 			var html = "",
-				i;
+				$parent, i;
 
 			// 動畫
 			$("#search_device").show().html("<div style='margin: 20px auto;text-align: center;'><img src='https://lh5.googleusercontent.com/-EyVZ0f8J0qQ/UCeEG7aa8nI/AAAAAAAADtY/9sXw53XkYXM/s512/indicator-light.gif' style='vertical-align: middle;' /><span style='vertical-align: middle;'> please wait...</span></div>");
 
 			for (i = 0; i < l; i++) {
+				$parent = $elem.eq(i).parents(".panel");
 				html += "<div class='panel panel-primary'>";
-				html += "<div class='panel-heading'>Raspberry Pi 加入成功</div>";
-				html += "<div class='panel-body'>" + $elem.eq(i).parents(".panel-body").html() + "</div>";
+				html += "<div class='panel-heading'>Raspberry Pi 加入成功 " + $parent.find(".panel-heading").html() + "</div>";
+				html += "<div class='panel-body'>" + $parent.find(".panel-body").html() + "</div>";
 				html += "</div>";
 			}
 
